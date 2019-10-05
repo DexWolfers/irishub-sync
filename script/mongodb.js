@@ -9,6 +9,7 @@
 // )
 
 // create collections
+db.createCollection("account");
 db.createCollection("block");
 db.createCollection("sync_task");
 db.createCollection("tx_common");

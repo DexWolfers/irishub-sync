@@ -28,4 +28,4 @@ replace github.com/tendermint/iavl => github.com/irisnet/iavl v0.12.2
 
 replace github.com/tendermint/tendermint => github.com/irisnet/tendermint v0.31.0
 
-replace github.com/irisnet/irishub-sync => github.com/DexWolfers/irishub-sync v0.15.1
+replace github.com/irisnet/irishub-sync => /Users/zxn/go_workspace/irishub-sync

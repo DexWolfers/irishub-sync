@@ -128,7 +128,7 @@ func executeTask(blockNumPerWorkerHandle, maxWorkerSleepTime int64, chanLimit ch
 		for {
 			select {
 			case <-healthCheckQuit:
-				logger.Info("get health check quit signal, now exit health check")
+				//logger.Debug("get health check quit signal, now exit health check")
 				return
 			default:
 				task, err := syncTaskModel.GetTaskByIdAndWorker(taskId, workerId)
@@ -141,9 +141,9 @@ func executeTask(blockNumPerWorkerHandle, maxWorkerSleepTime int64, chanLimit ch
 								log.Error("update last update time fail", logger.String("err", err.Error()),
 									logger.String("task_id", task.ID.Hex()))
 							}
-							logger.Info("health check success, now sleep one minute",
-								logger.String("task_id", task.ID.Hex()),
-								logger.String("task_current_worker", task.WorkerId))
+							//logger.Debug("health check success, now sleep one minute",
+							//	logger.String("task_id", task.ID.Hex()),
+							//	logger.String("task_current_worker", task.WorkerId))
 						} else {
 							log.Info("task is invalid, exit health check", logger.String("task_id", taskId.Hex()))
 							return
@@ -304,16 +304,17 @@ func parseBlock(b int64, client *helper.Client) (document.Block, error) {
 		return blockDoc, err
 	}
 
+	//TODO
 	// get validatorSet at given height
-	var validators []*types.Validator
-	res, err := client.Validators(&b)
-	if err != nil {
-		logger.Error("Can't get validatorSet at height", logger.Int64("Height", b))
-	} else {
-		validators = res.Validators
-	}
+	//var validators []*types.Validator
+	//res, err := client.Validators(&b)
+	//if err != nil {
+	//	logger.Error("Can't get validatorSet at height", logger.Int64("Height", b), logger.String("err", err.Error()))
+	//} else {
+	//	validators = res.Validators
+	//}
 
-	return handler.ParseBlock(block.BlockMeta, block.Block, validators, accsBalanceNeedUpdatedByParseTxs), nil
+	return handler.ParseBlock(block.BlockMeta, block.Block, []*types.Validator{}, accsBalanceNeedUpdatedByParseTxs), nil
 }
 
 // assert task worker unchanged

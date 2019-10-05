@@ -49,9 +49,7 @@ func (d Account) Save(account Account) error {
 // get account by primary key
 // return a empty struct when record is not exists
 func (d Account) getAccountByPK() (Account, error) {
-	var (
-		res Account
-	)
+	var res Account
 	find := func(c *mgo.Collection) error {
 		return c.Find(d.PkKvPair()).One(&res)
 	}
